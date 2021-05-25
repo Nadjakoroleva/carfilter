@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const SearchContainer = styled.div`
+export const SearchContainer = styled.section`
     display: flex;
     align-items: center;
     margin-bottom: 5rem;

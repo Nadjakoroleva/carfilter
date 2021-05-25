@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Button } from '@consta/uikit/Button';
-import {FilterTextField, FilterForm, BigFilterButton, SmallFilterButton, FilterButton, FilterCloseButton} from '../../styles/filterStyles';
+import {FilterTextField, FilterForm, BigFilterButton, SmallFilterButton, FilterButton, FilterCloseButton, FilterContent} from '../../styles/filterStyles';
 import {IconSortDownCenter} from '@consta/uikit/IconSortDownCenter';
 import {IconFunnel} from '@consta/uikit/IconFunnel';
 import {IconClose} from '@consta/uikit/IconClose';
@@ -60,24 +60,27 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
     }
 
     return (
+     
         <>
-        <FilterButton label='Фильтр' iconRight={IconFunnel} onlyIcon onClick={handleOpenFilterForm} isVisible={isVisible}/>
-        <FilterForm onSubmit={handleFilterSubmit} isVisible={isVisible}>
-            <div>
-                <Text view='secondary' size='3xl'>Фильтр</Text>
-                <FilterCloseButton label='Закрыть фильтр' iconRight={IconClose} onlyIcon isVisible={isVisible} onClick={handleCloseFilterForm} size='xs'/>
-            </div>
-            <FilterTextField id='brand' type="text" placeholder='Бренд' value={brandFilter} onChange={event => setBrandFilter(event.value!)}/>
-            <FilterTextField id='model' type="text" placeholder='Модель' value={modelFilter} onChange={event => setModelFilter(event.value!)}/>
-            <FilterTextField id='year' type="text" placeholder='Год' value={year} onChange={event => setYear(event.value!)}/>
-            <FilterTextField id='fuel' type="text" placeholder='Топливо' value={fuel} onChange={event => setFuel(event.value!)}/>
-            <FilterTextField id='bodyType' type="text" placeholder='Кузов' value={bodyType} onChange={event => setBodyType(event.value!)}/>
-            <FilterTextField id='price' type="text" placeholder='Цена' value={price} onChange={event => setPrice(event.value!)}/>
-            {searchPlace.inFilter ? <Search /> : null}
-            <Button type="submit" label='Фильтр' iconRight={IconSortDownCenter}/>
-            <BigFilterButton label='Очистить фильтр и строки поиска' view='secondary' onClick={handleClearFilter}/>
-            <SmallFilterButton label='Очистить фильтр' view='secondary' onClick={handleClearFilter}/>
-        </FilterForm>
+            <FilterButton label='Фильтр' iconRight={IconFunnel} onlyIcon onClick={handleOpenFilterForm} isVisible={isVisible}/>
+            <FilterContent isVisible={isVisible}>
+                <div>
+                    <Text view='secondary' size='3xl'>Фильтр</Text>
+                    <FilterCloseButton label='Закрыть фильтр' iconRight={IconClose} onlyIcon isVisible={isVisible} onClick={handleCloseFilterForm} size='xs'/>
+                </div>
+                <FilterForm onSubmit={handleFilterSubmit} >
+                    <FilterTextField id='brand' type="text" placeholder='Бренд' value={brandFilter} onChange={event => setBrandFilter(event.value!)}/>
+                    <FilterTextField id='model' type="text" placeholder='Модель' value={modelFilter} onChange={event => setModelFilter(event.value!)}/>
+                    <FilterTextField id='year' type="text" placeholder='Год' value={year} onChange={event => setYear(event.value!)}/>
+                    <FilterTextField id='fuel' type="text" placeholder='Топливо' value={fuel} onChange={event => setFuel(event.value!)}/>
+                    <FilterTextField id='bodyType' type="text" placeholder='Кузов' value={bodyType} onChange={event => setBodyType(event.value!)}/>
+                    <FilterTextField id='price' type="text" placeholder='Цена' value={price} onChange={event => setPrice(event.value!)}/>
+                    <Button type="submit" label='Фильтр' iconRight={IconSortDownCenter}/>
+                    <BigFilterButton label='Очистить фильтр и строки поиска' view='secondary' onClick={handleClearFilter}/>
+                    <SmallFilterButton label='Очистить все поля' view='secondary' onClick={handleClearFilter}/>
+                </FilterForm>
+                {searchPlace.inFilter ? <Search /> : null}
+            </FilterContent>
         </>
     );
 };
