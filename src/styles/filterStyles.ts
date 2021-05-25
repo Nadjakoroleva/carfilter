@@ -13,6 +13,23 @@ export const FilterTextField = styled(TextField)`
     }
 `;
 
+export const FilterPriceField = styled(TextField)`
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid blue;
+
+    @media screen and (max-width: 780px) {
+        padding: .3rem;
+    }
+`;
+
+export const PriceContainer = styled.div`
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+`;
+
 export const FilterForm = styled.form`
     display: flex;
     flex-direction: column;

@@ -5,7 +5,7 @@ const defaultState: IState = {
     currentCarList: []
 }
 
-const myFilter = (arr: Array<CarInfo>, action: any) => {
+const myFilter = (arr: Array<CarInfo>, action: any, state: any) => {
     return (
         arr.filter(car => 
             { 
@@ -15,7 +15,10 @@ const myFilter = (arr: Array<CarInfo>, action: any) => {
                     (action.payload.year ? car.year === +action.payload.year : true) && 
                     (action.payload.fuel ? car.fuel.toUpperCase().includes(action.payload.fuel.toUpperCase()) : true) && 
                     (action.payload.bodyType ? car.bodyType.toUpperCase().includes(action.payload.bodyType.toUpperCase()) : true) && 
-                    (action.payload.price ? car.price === +action.payload.price : true)
+                    (action.payload.minPrice && action.payload.maxPrice ? (car.price >= +action.payload.minPrice) && (car.price <= +action.payload.maxPrice) 
+                        : action.payload.minPrice ? car.price >= +action.payload.minPrice 
+                            : action.payload.maxPrice ? car.price <= +action.payload.maxPrice 
+                                : true)
                 );
             })
     )
@@ -27,7 +30,7 @@ export const currentCarListReducer = (state = defaultState, action: IAction): IS
         case 'ADD_CURRENT_CAR_LIST':
             return {...state, currentCarList: action.payload};
         case 'FILTER_CAR_LIST':
-            return {...state, currentCarList: ((!action.payload.searchModel && !action.payload.searchBrand ) || state.currentCarList!.length === 0) ? myFilter(carsList, action) : myFilter(state.currentCarList!, action)};
+            return {...state, currentCarList: ((!action.payload.searchModel && !action.payload.searchBrand ) || state.currentCarList!.length === 0) ? myFilter(carsList, action, state) : myFilter(state.currentCarList!, action, state)};
         case 'FILTER_BY_MODEL':
             return {...state, currentCarList: 
                 action.payload.brand ? state.currentCarList!.filter(car => car.model.toUpperCase().includes(action.payload.model.toUpperCase())) 
