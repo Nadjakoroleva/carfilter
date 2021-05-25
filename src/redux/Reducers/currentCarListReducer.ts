@@ -27,7 +27,7 @@ export const currentCarListReducer = (state = defaultState, action: IAction): IS
         case 'ADD_CURRENT_CAR_LIST':
             return {...state, currentCarList: action.payload};
         case 'FILTER_CAR_LIST':
-            return {...state, currentCarList: (!action.payload.searchModel && !action.payload.searchBrand || state.currentCarList!.length === 0) ? myFilter(carsList, action) : myFilter(state.currentCarList!, action)};
+            return {...state, currentCarList: ((!action.payload.searchModel && !action.payload.searchBrand ) || state.currentCarList!.length === 0) ? myFilter(carsList, action) : myFilter(state.currentCarList!, action)};
         case 'FILTER_BY_MODEL':
             return {...state, currentCarList: 
                 action.payload.brand ? state.currentCarList!.filter(car => car.model.toUpperCase().includes(action.payload.model.toUpperCase())) 

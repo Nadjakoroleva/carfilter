@@ -20,7 +20,6 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
     const [isVisible, setIsVivisible] = useState<boolean>(false);
 
     const dispatch = useDispatch();
-    const currentCarListReducer = useTypedSelector(state => state.currentCarList);
     const searchInfo = useTypedSelector(state => state.searchInfo);
     const searchPlace = useTypedSelector(state => state.searchPlace);
 

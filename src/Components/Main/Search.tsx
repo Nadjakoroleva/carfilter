@@ -10,7 +10,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 const Search: React.FC = () => {
 
     const dispatch = useDispatch();
-    const currentCarList = useTypedSelector(state => state.currentCarList).currentCarList;
     const searchInfo = useTypedSelector(state => state.searchInfo);
 
     function handleSearchSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
@@ -27,11 +26,11 @@ const Search: React.FC = () => {
     return (
         <SearchContainer>
             <SearchForm onSubmit={handleSearchSubmit}>
-                <TextField type='text' placeholder='Поиск по бренду' form='roundClear' value={searchInfo.brand} onChange={event => dispatch({type: 'ADD_BRAND', payload: event.value!})} />
+                <TextField id='1' type='text' placeholder='Поиск по бренду' form='roundClear' value={searchInfo.brand} onChange={event => dispatch({type: 'ADD_BRAND', payload: event.value!})} />
                 <Button iconLeft={IconSearch} form='brickRound' onlyIcon/>
             </SearchForm>
             <SearchForm onSubmit={handleSearchSubmit}>
-                <TextField type='text' placeholder='Поиск по модели' form='roundClear' value={searchInfo.model} onChange={event => dispatch({type: 'ADD_MODEL', payload: event.value!})}/>
+                <TextField id='2' type='text' placeholder='Поиск по модели' form='roundClear' value={searchInfo.model} onChange={event => dispatch({type: 'ADD_MODEL', payload: event.value!})}/>
                 <Button iconLeft={IconSearch} form='brickRound' onlyIcon/>  
             </SearchForm>
         </SearchContainer>
