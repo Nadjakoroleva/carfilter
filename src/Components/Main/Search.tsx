@@ -15,9 +15,9 @@ const Search: React.FC = () => {
     function handleSearchSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
         if (searchInfo.model) {
-            dispatch({type: 'FILTER_BY_MODEL', payload: {model: searchInfo.model, brand: searchInfo.brand}});
+            dispatch({type: 'FILTER_BY_MODEL', payload: {model: searchInfo.model, brand: searchInfo.brand.trim()}});
         } else if (searchInfo.brand) {
-            dispatch({type: 'FILTER_BY_BRAND', payload: {model: searchInfo.model, brand: searchInfo.brand}});
+            dispatch({type: 'FILTER_BY_BRAND', payload: {model: searchInfo.model, brand: searchInfo.brand.trim()}});
         } else {
             dispatch({type: 'ADD_CURRENT_CAR_LIST', payload: carsList});
         };

@@ -26,14 +26,14 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
     function handleFilterSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
         dispatch({type: 'FILTER_CAR_LIST', payload: {
-            'brandFilter': brandFilter, 
-            'modelFilter': modelFilter, 
-            'year': year, 
-            'fuel': fuel, 
-            'bodyType': bodyType, 
-            'price': price,
-            'searchModel': searchInfo.model,
-            'searchBrand': searchInfo.brand
+            'brandFilter': brandFilter.trim(), 
+            'modelFilter': modelFilter.trim(), 
+            'year': year.trim(), 
+            'fuel': fuel.trim(), 
+            'bodyType': bodyType.trim(), 
+            'price': price.trim(),
+            'searchModel': searchInfo.model.trim(),
+            'searchBrand': searchInfo.brand.trim()
         }});
        
     };
@@ -60,7 +60,6 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
     }
 
     return (
-     
         <>
             <FilterButton label='Фильтр' iconRight={IconFunnel} onlyIcon onClick={handleOpenFilterForm} isVisible={isVisible}/>
             <FilterContent isVisible={isVisible}>
