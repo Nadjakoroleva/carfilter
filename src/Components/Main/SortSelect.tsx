@@ -17,10 +17,11 @@ const SortSelect: React.FC = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const currentCarList = useTypedSelector(state => state.currentCarList).currentCarList;
-
+    const selectState = useTypedSelector(state => state.currentCarList).selectState;
+    
     return (
         <FormControl className={classes.formControl}>
-            <Select native onChange={event => {dispatch({type: event.target.value, payload: currentCarList})}}>
+            <Select native value={selectState} onChange={event => {dispatch({type: event.target.value, payload: currentCarList}); dispatch({type: 'CHANGE_SELECT_STATE', payload: event.target.value})}}>
                 <option value='SORT_BY_REDUCE_YEAR'>Сначала новые</option>
                 <option value='SORT_BY_INCREASE_YEAR'>Сначала старые</option>
                 <option value='SORT_BY_INCREASE_PRICE'>Возрастание цены</option>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const CarLogo = styled.img`
     max-width: 10vw;
-    height: 10vh;
+    height: 4.8rem;
     margin-right: 1rem;;
 `;
 

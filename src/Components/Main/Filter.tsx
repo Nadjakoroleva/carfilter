@@ -11,31 +11,27 @@ import { Text } from '@consta/uikit/Text';
 
 const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
 
-    const [modelFilter, setModelFilter] = useState<string>('');
-    const [brandFilter, setBrandFilter] = useState<string>('');
-    const [year, setYear] = useState<string>('');
-    const [fuel, setFuel] = useState<string>('');
-    const [bodyType, setBodyType] = useState<string>('');
-    const [minPrice, setMinPrice] = useState<string>('');
-    const [maxPrice, setMaxPrice] = useState<string>('');
     const [isVisible, setIsVivisible] = useState<boolean>(false);
 
     const dispatch = useDispatch();
     const searchInfo = useTypedSelector(state => state.searchInfo);
     const searchPlace = useTypedSelector(state => state.searchPlace);
+    const filterState = useTypedSelector(state => state.filterState);
 
     function handleFilterSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (brandFilter) dispatch({type: 'CLEAR_BRAND'});
-        if (modelFilter) dispatch({type: 'CLEAR_MODEL'});
+        if (isNaN(+filterState.year) || isNaN(+filterState.minPrice) || isNaN(+filterState.maxPrice)) {
+            alert('Введите числовые значения в поля год/цена: от/цена: до');
+            return;
+        };
         dispatch({type: 'FILTER_CAR_LIST', payload: {
-            'brandFilter': brandFilter ? brandFilter.trim() : '', 
-            'modelFilter': modelFilter ? modelFilter.trim() : '', 
-            'year': year ? year.trim() : '', 
-            'fuel': fuel ? fuel.trim() : '', 
-            'bodyType': modelFilter ? bodyType.trim() : '', 
-            'minPrice': minPrice ? minPrice.trim() : '0',
-            'maxPrice': maxPrice ? maxPrice.trim() : 'Infinity',
+            'brandFilter': filterState.brandFilter ? filterState.brandFilter.trim() : '', 
+            'modelFilter': filterState.modelFilter ? filterState.modelFilter.trim() : '', 
+            'year': filterState.year ? filterState.year.trim() : '', 
+            'fuel': filterState.fuel ? filterState.fuel.trim() : '', 
+            'bodyType': filterState.bodyType ? filterState.bodyType.trim() : '', 
+            'minPrice': filterState.minPrice ? filterState.minPrice.trim() : '0',
+            'maxPrice': filterState.maxPrice ? filterState.maxPrice.trim() : 'Infinity',
             'searchModel': searchInfo.model ? searchInfo.model.trim() : '',
             'searchBrand': searchInfo.brand ? searchInfo.brand.trim() : ''
         }});
@@ -43,13 +39,7 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
 
     function handleClearFilter(event: React.SyntheticEvent) {
         event.preventDefault();
-        setBrandFilter('');
-        setModelFilter('');
-        setYear('');
-        setFuel('');
-        setBodyType('');
-        setMinPrice('');
-        setMaxPrice('');
+        dispatch({type: 'CLEAR_FILTER'});
         dispatch({type: 'CLEAR_MODEL'});
         dispatch({type: 'CLEAR_BRAND'});
         dispatch({type: 'SORT_BY_REDUCE_YEAR', payload: carsList});
@@ -72,15 +62,15 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
                     <FilterCloseButton label='Закрыть фильтр' iconRight={IconClose} onlyIcon isVisible={isVisible} onClick={handleCloseFilterForm} size='xs'/>
                 </div>
                 <FilterForm onSubmit={handleFilterSubmit} >
-                    <FilterTextField type="text" placeholder='Бренд' value={brandFilter} onChange={event => setBrandFilter(event.value!)}/>
-                    <FilterTextField type="text" placeholder='Модель' value={modelFilter} onChange={event => setModelFilter(event.value!)}/>
-                    <FilterTextField type="text" placeholder='Год' value={year} onChange={event => setYear(event.value!)}/>
-                    <FilterTextField type="text" placeholder='Топливо' value={fuel} onChange={event => setFuel(event.value!)}/>
-                    <FilterTextField type="text" placeholder='Кузов' value={bodyType} onChange={event => setBodyType(event.value!)}/>
+                    <FilterTextField type="text" placeholder='Бренд' value={filterState.brandFilter} onChange={event => dispatch({type: 'FILTER_BRAND', payload: event.value!})}/>
+                    <FilterTextField type="text" placeholder='Модель' value={filterState.modelFilter} onChange={event => dispatch({type: 'FILTER_MODEL', payload: event.value!})}/>
+                    <FilterTextField type="text" placeholder='Год' value={filterState.year} onChange={event => dispatch({type: 'FILTER_YEAR', payload: event.value!})}/>
+                    <FilterTextField type="text" placeholder='Топливо' value={filterState.fuel} onChange={event => dispatch({type: 'FILTER_FUEL', payload: event.value!})}/>
+                    <FilterTextField type="text" placeholder='Кузов' value={filterState.bodyType} onChange={event => dispatch({type: 'FILTER_BODYTYPE', payload: event.value!})}/>
                     <PriceContainer>
-                        <FilterPriceField type="text" placeholder='От какой цены' value={minPrice} onChange={event => setMinPrice(event.value!)}/>
+                        <FilterPriceField type="text" placeholder='Цена: от' value={filterState.minPrice} onChange={event => dispatch({type: 'FILTER_MINPRICE', payload: event.value!})}/>
                         -
-                        <FilterPriceField type="text" placeholder='До какой цены' value={maxPrice} onChange={event => setMaxPrice(event.value!)}/>
+                        <FilterPriceField type="text" placeholder='Цена: до' value={filterState.maxPrice} onChange={event => dispatch({type: 'FILTER_MAXPRICE', payload: event.value!})}/>
                     </PriceContainer>
                     <Button type="submit" label='Фильтр' iconRight={IconSortDownCenter}/>
                     <BigFilterButton label='Очистить фильтр и строки поиска' view='secondary' onClick={handleClearFilter}/>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, GridItem } from '@consta/uikit/Grid';
 import Search from './Search';
 import SortSelect from './SortSelect';
@@ -6,11 +6,24 @@ import CarCard from './CarCard';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Content } from '../../styles/mainStyles';
 import { Text } from '@consta/uikit/Text';
+import { useDispatch } from 'react-redux';
 
 const MainContent: React.FC = () => {
 
+    const dispatch = useDispatch();
     const currentCarList = useTypedSelector(state => state.currentCarList).currentCarList;
     const searchPlace = useTypedSelector(state => state.searchPlace);
+
+    
+
+    useEffect(() => {
+        if (currentCarList) {
+            if (currentCarList.length <= 0) {
+                dispatch({type: 'CLEAR_BRAND'});
+                dispatch({type: 'CLEAR_MODEL'});
+            }
+        } 
+    }, [currentCarList])
 
     return (
         <Content>

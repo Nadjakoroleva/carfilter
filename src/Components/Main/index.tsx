@@ -26,8 +26,16 @@ const Main: React.FC = () => {
     }, []);
 
    useEffect(() => {
-        if (sortedCarList.sortedCarList!?.length > 0) dispatch({type: 'ADD_CURRENT_CAR_LIST', payload: sortedCarList.sortedCarList!});
+        if (sortedCarList.sortedCarList!?.length > 0) {
+            dispatch({type: 'ADD_CURRENT_CAR_LIST', payload: sortedCarList.sortedCarList!});
+            
+        };
     }, [sortedCarList]);
+
+    useEffect(() => {
+        dispatch({type: 'CHANGE_SELECT_STATE', payload: 'SORT_BY_REDUCE_YEAR'});
+        dispatch({type: 'SORT_BY_REDUCE_YEAR', payload: currentCarList})
+    }, [currentCarList])
 
     useEffect(() => {
         if (windowSize < 780) {

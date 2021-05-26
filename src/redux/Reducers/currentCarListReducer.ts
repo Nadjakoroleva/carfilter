@@ -2,7 +2,8 @@ import { carsList } from "../../Cars/carsList";
 import { CarInfo, IAction, IState } from "../../types/interfaces";
 
 const defaultState: IState = {
-    currentCarList: []
+    currentCarList: [],
+    selectState: 'SORT_BY_REDUCE_YEAR'
 }
 
 const myFilter = (arr: Array<CarInfo>, action: any, state: any) => {
@@ -41,6 +42,8 @@ export const currentCarListReducer = (state = defaultState, action: IAction): IS
                 action.payload.model ? state.currentCarList!.filter(car => car.brand.toUpperCase().includes(action.payload.brand.toUpperCase())) 
                                      : carsList.filter(car => car.brand.toUpperCase().includes(action.payload.brand.toUpperCase()))
             };
+        case 'CHANGE_SELECT_STATE':
+            return {...state, selectState: action.payload};
         default:
             return state;
     }

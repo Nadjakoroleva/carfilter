@@ -15,7 +15,8 @@ export interface IAction {
 
 export interface IState {
     sortedCarList?: Array<CarInfo>,
-    currentCarList?: Array<CarInfo>
+    currentCarList?: Array<CarInfo>,
+    selectState?: string
 }
 
 export interface ISearchState {
@@ -25,4 +26,14 @@ export interface ISearchState {
 
 export interface ISearchPlace {
     inFilter: boolean
+}
+
+export interface IFilterState {
+    brandFilter: string,
+    modelFilter: string,
+    year: string,
+    fuel: string,
+    bodyType: string,
+    minPrice: string,
+    maxPrice: string
 }
