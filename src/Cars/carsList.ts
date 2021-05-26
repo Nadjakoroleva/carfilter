@@ -30,7 +30,7 @@ export const carsList: Array<CarInfo> = [
          "price": 8010184
      },
      {
-         "logo": "./carsImg/mercedes_s-class.png",
+         "logo": "./carsImg/mercedes_s-class.webp",
          "brand": "Mercedes-Benz",
          "model": "S-Class", 
          "year": 2021,   
@@ -39,7 +39,7 @@ export const carsList: Array<CarInfo> = [
          "price": 13370000
      },
      {
-         "logo": "./carsImg/mercedes_e-class.png",
+         "logo": "./carsImg/mercedes_e-class.webp",
          "brand": "Mercedes-Benz",
          "model": "E 220 d 4MATIC All-Terrain Luxury", 
          "year": 2021,   
@@ -48,7 +48,7 @@ export const carsList: Array<CarInfo> = [
          "price": 5450000
      },
      {
-         "logo": "./carsImg/mercedes_a-class.png",
+         "logo": "./carsImg/mercedes_a-class.webp",
          "brand": "Mercedes-Benz",
          "model": "A 200 Sport", 
          "year": 2021,   
@@ -75,7 +75,7 @@ export const carsList: Array<CarInfo> = [
          "price": 2980000
      },
      {
-         "logo": "./carsImg/audi_a7.jpg",
+         "logo": "./carsImg/audi_a7.webp",
          "brand": "Audi",
          "model": "RS 7", 
          "year": 2021,   
