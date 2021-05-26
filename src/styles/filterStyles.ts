@@ -33,9 +33,13 @@ export const PriceContainer = styled.div`
 export const FilterForm = styled.form`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    div, button {
+        margin-bottom: 1rem;
+    }
     margin-right: 5rem;
     order: 2
+
+    
 `;
 
 export const FilterContent = styled.div<{isVisible: boolean}>`
@@ -54,7 +58,7 @@ export const FilterContent = styled.div<{isVisible: boolean}>`
             align-self: flex-start;
             margin: 0;
         }
-        position: fixed;
+        position: absolute;
         z-index: 5;
         padding: 1rem;
         background-color: #2caee8;

@@ -18,6 +18,7 @@ export const SearchForm = styled.form`
 
     @media screen and (max-width: 780px) {
         margin-right: 0;
+        margin-bottom: .5rem;
     }
 `;
 
