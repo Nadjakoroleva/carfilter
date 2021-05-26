@@ -22,6 +22,7 @@ const Search: React.FC = () => {
         } else {
             dispatch({type: 'ADD_CURRENT_CAR_LIST', payload: carsList});
         };
+        dispatch({type: 'CLOSE_FILTER'});
     };
 
     return (

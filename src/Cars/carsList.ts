@@ -7,7 +7,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "BMW",
          "model": "X6", 
          "year": 2019,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "Hatchback",
          "price": 4175000
     },
@@ -16,7 +16,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "BMW",
          "model": "X3 xDrive30d M Sport", 
          "year": 2020,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "SUV",
          "price": 5230000
      },
@@ -25,7 +25,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "BMW",
          "model": "X5 xDrive40i M Sport Pro", 
          "year": 2021,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "SUV",
          "price": 8010184
      },
@@ -34,7 +34,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "Mercedes-Benz",
          "model": "S-Class", 
          "year": 2021,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "Sedan",
          "price": 13370000
      },
@@ -43,7 +43,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "Mercedes-Benz",
          "model": "E 220 d 4MATIC All-Terrain Luxury", 
          "year": 2021,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "Estate",
          "price": 5450000
      },
@@ -70,7 +70,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "Audi",
          "model": "A5 Sportback Sport TDI", 
          "year": 2019,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "Coupe",
          "price": 2980000
      },
@@ -79,7 +79,7 @@ export const carsList: Array<CarInfo> = [
          "brand": "Audi",
          "model": "RS 7", 
          "year": 2021,   
-         "fuel": "disel",   
+         "fuel": "diesel",   
          "bodyType": "Sportback",
          "price": 10135000
      },

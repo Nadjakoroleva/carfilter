@@ -11,12 +11,13 @@ import { Text } from '@consta/uikit/Text';
 
 const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
 
-    const [isVisible, setIsVivisible] = useState<boolean>(false);
+    
 
     const dispatch = useDispatch();
     const searchInfo = useTypedSelector(state => state.searchInfo);
     const searchPlace = useTypedSelector(state => state.searchPlace);
     const filterState = useTypedSelector(state => state.filterState);
+    const filterVisible = useTypedSelector(state => state.filterVisible).isVisible;
 
     function handleFilterSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -35,6 +36,7 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
             'searchModel': searchInfo.model ? searchInfo.model.trim() : '',
             'searchBrand': searchInfo.brand ? searchInfo.brand.trim() : ''
         }});
+        dispatch({type: 'CLOSE_FILTER'});
     };
 
     function handleClearFilter(event: React.SyntheticEvent) {
@@ -43,23 +45,24 @@ const Filter: React.FC<{Search: React.FC}> = ({Search}) => {
         dispatch({type: 'CLEAR_MODEL'});
         dispatch({type: 'CLEAR_BRAND'});
         dispatch({type: 'SORT_BY_REDUCE_YEAR', payload: carsList});
+        dispatch({type: 'CLOSE_FILTER'});
     }
 
     function handleOpenFilterForm() {
-        setIsVivisible(true);
+        dispatch({type: 'OPEN_FILTER'});
     }
 
     function handleCloseFilterForm() {
-        setIsVivisible(false);
+        dispatch({type: 'CLOSE_FILTER'});
     }
 
     return (
         <>
-            <FilterButton label='Фильтр' iconRight={IconFunnel} onlyIcon onClick={handleOpenFilterForm} isVisible={isVisible}/>
-            <FilterContent isVisible={isVisible}>
+            <FilterButton label='Фильтр' iconRight={IconFunnel} onlyIcon onClick={handleOpenFilterForm} isVisible={filterVisible}/>
+            <FilterContent isVisible={filterVisible}>
                 <div>
                     <Text view='secondary' size='3xl'>Фильтр</Text>
-                    <FilterCloseButton label='Закрыть фильтр' iconRight={IconClose} onlyIcon isVisible={isVisible} onClick={handleCloseFilterForm} size='xs'/>
+                    <FilterCloseButton label='Закрыть фильтр' iconRight={IconClose} onlyIcon isVisible={filterVisible} onClick={handleCloseFilterForm} size='xs'/>
                 </div>
                 <FilterForm onSubmit={handleFilterSubmit} >
                     <FilterTextField type="text" placeholder='Бренд' value={filterState.brandFilter} onChange={event => dispatch({type: 'FILTER_BRAND', payload: event.value!})}/>
